@@ -10,8 +10,8 @@
 
 /*RCC config*/
 void RCC_voidInit(void);
-void RCC_voidEnablePeripheralCLK(u8 Copy_u8Bus , u8 Copy_u8Per);
-void RCC_voidDisablePeripheralCLK(u8 Copy_u8Bus , u8 Copy_u8Per);
+u8 RCC_u8EnablePeripheralCLK(u8 Copy_u8Bus, u8 Copy_u8Per);
+u8 RCC_u8DisablePeripheralCLK(u8 Copy_u8Bus, u8 Copy_u8Per);
 
 /*Macros for Buses*/
 #define RCC_AHB				0
