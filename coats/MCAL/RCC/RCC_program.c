@@ -16,14 +16,13 @@
 void RCC_voidInit(void)
 {
 #if 	RCC_CLK_TYPE == RCC_HSE_CRYSTAL
-/*Not bypass - Enable HSE - SW = HSE*/
-RCC_CR   = 0x00010000;
-RCC_CFGR = 0x00000001;
-/*polling till HSE is Ready*/
-while(GET_BIT(RCC_CR,17)==0)
-{
-	asm("NOP");
-}
+	/*Not bypass - Enable HSE - SW = HSE*/
+	RCC_CR = 0x00010000;
+	RCC_CFGR = 0x00000001;
+	/*polling till HSE is Ready*/
+	while (GET_BIT(RCC_CR,17) == 0) {
+		asm("NOP");
+	}
 
 #elif	RCC_CLK_TYPE == RCC_HSE_RC
 /*Not bypass - Enable HSE - SW = HSE*/
@@ -154,26 +153,26 @@ CLR_BIT(RCC_CFGR,18);
 #endif
 }
 
-u8 RCC_voidEnablePeripheralCLK(u8 Copy_u8Bus , u8 Copy_u8Per)
+u8 RCC_u8EnablePeripheralCLK(u8 Copy_u8Bus, u8 Copy_u8Per)
 {
 	u8 Local_u8Errorstate = STD_TYPES_OK;
 	/*Range check*/
-	if(Copy_u8Per<32)
+	if (Copy_u8Per < 32) 
 	{
-	switch(Copy_u8Bus)
-	{
-	case RCC_AHB :
-			SET_BIT(RCC_AHBENR , Copy_u8Per);
+		switch (Copy_u8Bus) 
+		{
+		case RCC_AHB:
+			SET_BIT(RCC_AHBENR, Copy_u8Per);
 			break;
-	case RCC_APB1 :
-			SET_BIT(RCC_APB1ENR , Copy_u8Per);
+		case RCC_APB1:
+			SET_BIT(RCC_APB1ENR, Copy_u8Per);
 			break;
-	case RCC_APB2 :
-			SET_BIT(RCC_APB2ENR , Copy_u8Per);
+		case RCC_APB2:
+			SET_BIT(RCC_APB2ENR, Copy_u8Per);
 			break;
 
-	}
-	}
+		}
+	} 
 	else 
 	{
 		Local_u8Errorstate = STD_TYPES_NOK;
@@ -182,27 +181,27 @@ u8 RCC_voidEnablePeripheralCLK(u8 Copy_u8Bus , u8 Copy_u8Per)
 
 }
 
-u8 RCC_voidDisablePeripheralCLK(u8 Copy_u8Bus , u8 Copy_u8Per)
+u8 RCC_u8DisablePeripheralCLK(u8 Copy_u8Bus, u8 Copy_u8Per)
 {
-	u8 Local_u8Errorstate = STD_TYPES_OK;
+	Local_u8Errorstate = STD_TYPES_OK;
 	/*Range check*/
-		if(Copy_u8Per<32)
+	if (Copy_u8Per < 32) 
+	{
+		switch (Copy_u8Bus) 
 		{
-		switch(Copy_u8Bus)
-		{
-		case RCC_AHB :
-				CLR_BIT(RCC_AHBENR , Copy_u8Per);
-				break;
-		case RCC_APB1 :
-				CLR_BIT(RCC_APB1ENR , Copy_u8Per);
-				break;
-		case RCC_APB2 :
-				CLR_BIT(RCC_APB2ENR , Copy_u8Per);
-				break;
+		case RCC_AHB:
+			CLR_BIT(RCC_AHBENR, Copy_u8Per);
+			break;
+		case RCC_APB1:
+			CLR_BIT(RCC_APB1ENR, Copy_u8Per);
+			break;
+		case RCC_APB2:
+			CLR_BIT(RCC_APB2ENR, Copy_u8Per);
+			break;
 
 		}
-		}
-	else 
+	} 
+	else
 	{
 		Local_u8Errorstate = STD_TYPES_NOK;
 	}
