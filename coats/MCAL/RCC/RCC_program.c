@@ -153,8 +153,10 @@ CLR_BIT(RCC_CFGR,18);
 #else	#error ("Wrong choice of RCC Clock type")
 #endif
 }
-void RCC_voidEnablePeripheralCLK(u8 Copy_u8Bus , u8 Copy_u8Per)
+
+u8 RCC_voidEnablePeripheralCLK(u8 Copy_u8Bus , u8 Copy_u8Per)
 {
+	u8 Local_u8Errorstate = STD_TYPES_OK;
 	/*Range check*/
 	if(Copy_u8Per<32)
 	{
@@ -172,10 +174,17 @@ void RCC_voidEnablePeripheralCLK(u8 Copy_u8Bus , u8 Copy_u8Per)
 
 	}
 	}
+	else 
+	{
+		Local_u8Errorstate = STD_TYPES_NOK;
+	}
+	return Local_u8Errorstate;
 
 }
-void RCC_voidDisablePeripheralCLK(u8 Copy_u8Bus , u8 Copy_u8Per)
+
+u8 RCC_voidDisablePeripheralCLK(u8 Copy_u8Bus , u8 Copy_u8Per)
 {
+	u8 Local_u8Errorstate = STD_TYPES_OK;
 	/*Range check*/
 		if(Copy_u8Per<32)
 		{
@@ -193,5 +202,10 @@ void RCC_voidDisablePeripheralCLK(u8 Copy_u8Bus , u8 Copy_u8Per)
 
 		}
 		}
+	else 
+	{
+		Local_u8Errorstate = STD_TYPES_NOK;
+	}
+	return Local_u8Errorstate;
 
 }
